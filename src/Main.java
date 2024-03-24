@@ -91,4 +91,47 @@ public class Main {
         // Нужно, для того, чтобы получить массив подстрок,
         // соответствующих отдельным словам в исходной строке.
     }
+
+    // Билет №4. Напишите код, с помощью которого можно перевернуть массив.
+    public static void reverse(Object[] arr) {
+        int len = arr.length; // Получаем длину массива arr, которая сохраняется в переменной len.
+        Object[] reversed = new Object[len]; // Создаем новый массив объектов reversed, размер которого равен длине исходного массива.
+        // Цикл используется для переворачивания массива.
+        // Начинаем с индекса 0 и идем до середины массива (len / 2).
+        // На каждой итерации меняем местами элементы исходного массива на
+        // противоположных позициях относительно середины массива.
+        for (int i = 0; i < len / 2; i++) {
+            reversed[i] = arr[len - 1 - i];
+            reversed[len - i - 1] = arr[i];
+        }
+        // Проверяем является ли длина массива нечетной.
+        // Если да, то мы сохраняем центральный элемент на своем месте,
+        // в противном случае тоже переворачиваем.
+        if (len % 2 == 1) {
+            reversed[(len - 1) / 2] = arr[(len - 1) / 2];
+        }
+        arr = reversed; // Заменена оригинального массива arr на перевернутый reversed.
+    }
+
+    // ... или сделать возвращаемый метод.
+    public static class ReversedArray {
+        private Object[] original;
+        private Object[] reversed;
+
+        public ReversedArray(Object[] array) {
+            this.original = array;
+            this.reversed = new Object[array.length];
+            for (int i = 0; i < array.length / 2; i++) {
+                reversed[i] = array[array.length - 1 - i];
+                reversed[array.length - i - 1] = array[i];
+            }
+            if (array.length % 2 == 1) {
+                reversed[(array.length - 1) / 2] = array[(array.length - 1) / 2];
+            }
+        }
+
+        public Object[] getReversed() {
+            return reversed;
+        }
+    }
 }

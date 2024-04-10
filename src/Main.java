@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -266,6 +263,27 @@ public class Main {
                 System.out.println("Ошибка: " + e.getMessage());
                 e.printStackTrace();
             }
+        }
+    }
+
+    //Билет №10. Дан массив строк, необходимо удалить из него все дубли,
+    // оставшиеся строки объединить в одну в порядке следования в массиве.
+    //В этом примере для устранения дубликатов и сохранения исходного порядка элементов
+    // используется `LinkedHashSet`.
+    // Это позволяет легко добавлять элементы, автоматически исключая дубли,
+    // и затем объединять оставшиеся уникальные строки в одну.
+
+    public class UniqueStringConcatenator {
+        public static void main(String[] args) {
+            String[] array = {"Java", "Python", "Java", "C", "Python", "Java"};
+            // Используем LinkedHashSet для сохранения уникальности и порядка элементов
+            Set<String> uniqueElements = new LinkedHashSet<>();
+            for (String element : array) {
+                uniqueElements.add(element);
+            }
+            // Объединяем оставшиеся элементы в одну строку
+            String result = String.join("", uniqueElements);
+            System.out.println(result);
         }
     }
 }

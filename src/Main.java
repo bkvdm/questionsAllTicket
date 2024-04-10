@@ -248,4 +248,24 @@ public class Main {
             }
         }
     }
+
+    //Билет №9. Пример обработки нескольких исключений в одном блоке catch
+    //В этом примере демонстрируется обработка двух типов исключений
+    // `ArithmeticException` и `ArrayIndexOutOfBoundsException`
+    // в одном блоке `catch`. Такая возможность появилась в Java 7 и
+    // позволяет более компактно обрабатывать множество исключений,
+    // когда логика их обработки идентична.
+    public class MultipleExceptionsHandling {
+        public static void main(String[] args) {
+            try {
+                int a = args.length;
+                int b = 10 / a;
+                int[] c = {1};
+                System.out.println(c[a]);
+            } catch (ArithmeticException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("Ошибка: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
 }

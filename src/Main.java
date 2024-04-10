@@ -141,7 +141,8 @@ public class Main {
             return reversed;
         }
     }
-//Билет №5. Как отсортировать коллекцию элементов?
+
+    //Билет №5. Как отсортировать коллекцию элементов?
     List<Student> students = Collections.sort(students, Comparator.comparing(Student::getAge)); // Сортировка по возрасту
 
     private Object Student;
@@ -187,7 +188,7 @@ public class Main {
     // Ошибка перехватывается блоком `catch` и
     // обрабатывается путем вывода сообщения об ошибке на консоль.
 
-     public class ExceptionExample {
+    public class ExceptionExample {
 
         public static void main(String[] args) {
             try {
@@ -198,6 +199,7 @@ public class Main {
                 // Ошибка: / by zero
             }
         }
+
         public static int divide(int a, int b) {
             return a / b; // Может привести к ArithmeticException в случае b == 0
         }
@@ -216,4 +218,34 @@ public class Main {
 //    FROM book b
 //    JOIN author a ON b.author_id = a.id
 //    WHERE a.name = 'Достоевский';
+
+    // Билет №8. Напишите пример перехвата и обработки исключения
+    // с использованием собственных исключений."
+    // В этом примере создается пользовательское исключение `MyException`,
+    // которое наследуется от `Exception`. Метод `test` генерирует `MyException`,
+    // если его аргумент меньше нуля. В методе `main` вызывается метод `test`,
+    // и возможное исключение перехватывается и обрабатывается в блоке `try-catch`.
+
+    class MyException extends Exception {
+        public MyException(String message) {
+            super(message);
+        }
+    }
+
+    public class TestExceptionHandling {
+        public static void test(int value) throws MyException {
+            if (value < 0) {
+                throw new MyException("Значение не должно быть меньше нуля");
+            }
+            System.out.println("Значение корректно: " + value);
+        }
+
+        public static void main(String[] args) {
+            try {
+                test(-1);
+            } catch (MyException e) {
+                System.err.println("Перехвачено пользовательское исключение: " + e.getMessage());
+            }
+        }
+    }
 }

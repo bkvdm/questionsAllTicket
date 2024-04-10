@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -52,7 +53,13 @@ public class Main {
 
     // Билет №3. Напишите код, с помощью которого можно перевернуть массив.
 
-    private static String[] split(String input) { // Начало метода split, который принимает строку input в качестве аргумента и возвращает массив строк.
+    // простое решение
+    public String[] split(String str) {
+        return str.split("\\s+");
+    }
+
+    // сложное решение
+    private static String[] splitDifficult(String input) { // Начало метода split, который принимает строку input в качестве аргумента и возвращает массив строк.
         if (input == null || input.trim().isEmpty()) { // Строка проверяет, является ли входная строка null или пустой.
             return new String[0];
         } else {
@@ -134,4 +141,79 @@ public class Main {
             return reversed;
         }
     }
+//Билет №5. Как отсортировать коллекцию элементов?
+    List<Student> students = Collections.sort(students, Comparator.comparing(Student::getAge)); // Сортировка по возрасту
+
+    private Object Student;
+    List<Student> sorted = students.stream()
+            .sorted(Comparator.comparing(Student::getName))
+            .collect(Collectors.toList()); // Сортировка по имени
+
+//Задача
+//Напишите методы Equals and HashCode для класса Student,
+// который состоит из полей String name и int age.
+
+    public class Student {
+        private String name;
+        private int age;
+
+        public Student(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Геттеры и сеттеры опущены для краткости
+
+        @Override
+        public boolean equals(Object o) {
+            // Если объект сравнивается сам с собой, он точно равен
+            if (this == o) return true;
+            // Если объект null или классы разные, объекты точно не равны
+            if (o == null || getClass() != o.getClass()) return false;
+            // Приведение типа и сравнение полей
+            Student student = (Student) o;
+            return age == student.age && Objects.equals(name, student.name);
+        }
+
+        @Override
+        public int hashCode() {
+            // Использование стандартного метода из класса Objects для генерации хэш-кода
+            return Objects.hash(name, age);
+        }
+    }
+    //Билет №6.
+    //В этом примере пытаемся выполнить деление на ноль,
+    // что приводит к генерации `ArithmeticException`.
+    // Ошибка перехватывается блоком `catch` и
+    // обрабатывается путем вывода сообщения об ошибке на консоль.
+
+     public class ExceptionExample {
+
+        public static void main(String[] args) {
+            try {
+                int result = divide(10, 0);
+                System.out.println("Результат деления: " + result);
+            } catch (ArithmeticException e) {
+                System.err.println("Произошла ошибка: " + e.getMessage());
+                // Ошибка: / by zero
+            }
+        }
+        public static int divide(int a, int b) {
+            return a / b; // Может привести к ArithmeticException в случае b == 0
+        }
+    }
+
+    //Билет №7.
+    //Есть таблица book с колонками name и author_id и
+    // таблица author с колонками id и name.
+    // Вывести все книги определенного автора (author.name).
+    //
+    // Чтобы вывести все книги определенного автора
+    // (пусть, например, автор будет "Достоевский"), необходимо выполнить SQL запрос,
+    // который выполнит соединение таблиц `book` и `author` и
+    // отфильтрует результаты по имени автора:
+//    SELECT b.name, b.year
+//    FROM book b
+//    JOIN author a ON b.author_id = a.id
+//    WHERE a.name = 'Достоевский';
 }

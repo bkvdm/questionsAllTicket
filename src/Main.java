@@ -286,4 +286,26 @@ public class Main {
             System.out.println(result);
         }
     }
+
+    // Билет №11. Дан массив пар названий книг и авторов,
+    // необходимо привести каждую пару в строку вида:
+    // «Название книги» Имя Отчество Фамилия автора.
+    // В этом решении мы имеем дело с двумерным массивом `String`,
+    // где каждый вложенный массив состоит из двух строк:
+    // название книги и полное имя автора.
+    // Затем мы просто проходимся по массиву и форматируем строки согласно заданию.
+    public class BookPairsToString {
+        public static void main(String[] args) {
+            String[][] bookAuthorPairs = {
+                    {"Война и мир", "Лев Николаевич Толстой"},
+                    {"Преступление и наказание", "Федор Михайлович Достоевский"}
+            };
+
+            for (String[] pair : bookAuthorPairs) {
+                String bookTitle = pair[0];
+                String authorName = pair[1];
+                System.out.println("«" + bookTitle + "» " + authorName);
+            }
+        }
+    }
 }
